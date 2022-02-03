@@ -3,7 +3,7 @@
 # computed by SQLFluff when running the tests. Please run
 # `python test/generate_parse_fixture_yml.py`  to generate them after adding or
 # altering SQL files.
-_hash: da05343c3524c758f1cefc015796188ef2dc202a28bed5b8817b4edb603525e5
+_hash: ad1947b24c5cbd058151046acb21f3d26653e3480e8f8ada93b929595ae38995
 file:
 - statement:
     alter_table_statement:
@@ -28,18 +28,18 @@ file:
     - alter_table_table_column_action:
       - keyword: ADD
       - keyword: COLUMN
-      - column_definition:
+      - column_reference:
           identifier: my_column
-          data_type:
-            data_type_identifier: VARCHAR
-            bracketed:
-              start_bracket: (
-              expression:
-                literal: '5000'
-              end_bracket: )
-          column_constraint_segment:
-          - keyword: NOT
-          - keyword: 'NULL'
+      - data_type:
+          data_type_identifier: VARCHAR
+          bracketed:
+            start_bracket: (
+            expression:
+              literal: '5000'
+            end_bracket: )
+      - alter_table_table_column_action_add_column_inline_constraint:
+        - keyword: NOT
+        - keyword: 'NULL'
 - statement_terminator: ;
 - statement:
     alter_table_statement:
@@ -127,6 +127,197 @@ file:
       - literal: '10000'
       - keyword: INCREMENT
       - literal: '1'
+- statement_terminator: ;
+- statement:
+    alter_table_statement:
+    - keyword: ALTER
+    - keyword: TABLE
+    - table_reference:
+        identifier: my_table
+    - alter_table_table_column_action:
+      - keyword: ADD
+      - keyword: COLUMN
+      - column_reference:
+          identifier: my_column
+      - data_type:
+          data_type_identifier: INTEGER
+      - alter_table_table_column_action_add_column_inline_constraint:
+        - keyword: NOT
+        - keyword: 'NULL'
+- statement_terminator: ;
+- statement:
+    alter_table_statement:
+    - keyword: ALTER
+    - keyword: TABLE
+    - table_reference:
+        identifier: my_table
+    - alter_table_table_column_action:
+      - keyword: ADD
+      - keyword: COLUMN
+      - column_reference:
+          identifier: my_column
+      - data_type:
+          data_type_identifier: VARCHAR
+      - alter_table_table_column_action_add_column_inline_constraint:
+        - keyword: NOT
+        - keyword: 'NULL'
+    unparsable:
+    - raw: CONSTRAINT
+    - raw: '"some_constraint"'
+- statement_terminator: ;
+- statement:
+    alter_table_statement:
+    - keyword: ALTER
+    - keyword: TABLE
+    - table_reference:
+        identifier: my_table
+    - alter_table_table_column_action:
+      - keyword: ADD
+      - keyword: COLUMN
+      - column_reference:
+          identifier: my_column
+      - data_type:
+          data_type_identifier: VARCHAR
+      - alter_table_table_column_action_add_column_inline_constraint:
+        - keyword: NOT
+        - keyword: 'NULL'
+    unparsable:
+    - raw: CONSTRAINT
+    - raw: '"some_constraint"'
+    - raw: UNIQUE
+- statement_terminator: ;
+- statement:
+    alter_table_statement:
+    - keyword: ALTER
+    - keyword: TABLE
+    - table_reference:
+        identifier: my_table
+    - alter_table_table_column_action:
+      - keyword: ADD
+      - keyword: COLUMN
+      - column_reference:
+          identifier: my_column
+      - data_type:
+          data_type_identifier: VARCHAR
+      - alter_table_table_column_action_add_column_inline_constraint:
+        - keyword: NOT
+        - keyword: 'NULL'
+    unparsable:
+    - raw: CONSTRAINT
+    - raw: '"some_constraint"'
+    - raw: PRIMARY
+    - raw: KEY
+- statement_terminator: ;
+- statement:
+    alter_table_statement:
+    - keyword: ALTER
+    - keyword: TABLE
+    - table_reference:
+        identifier: my_table
+    - alter_table_table_column_action:
+      - keyword: ADD
+      - keyword: COLUMN
+      - column_reference:
+          identifier: my_column
+      - data_type:
+          data_type_identifier: VARCHAR
+      - alter_table_table_column_action_add_column_inline_constraint:
+        - keyword: NOT
+        - keyword: 'NULL'
+    unparsable:
+    - raw: CONSTRAINT
+    - raw: '"some_constraint"'
+    - raw: FOREIGN
+    - raw: KEY
+    - raw: REFERENCES
+    - raw: my_other_table
+- statement_terminator: ;
+- statement:
+    alter_table_statement:
+    - keyword: ALTER
+    - keyword: TABLE
+    - table_reference:
+        identifier: my_table
+    - alter_table_table_column_action:
+      - keyword: ADD
+      - keyword: COLUMN
+      - column_reference:
+          identifier: my_column
+      - data_type:
+          data_type_identifier: VARCHAR
+      - alter_table_table_column_action_add_column_inline_constraint:
+        - keyword: NOT
+        - keyword: 'NULL'
+    unparsable:
+    - raw: CONSTRAINT
+    - raw: '"some_constraint"'
+    - raw: FOREIGN
+    - raw: KEY
+    - raw: REFERENCES
+    - raw: my_other_table
+    - bracketed:
+        start_bracket: (
+        raw: my_other_column
+        end_bracket: )
+- statement_terminator: ;
+- statement:
+    alter_table_statement:
+    - keyword: ALTER
+    - keyword: TABLE
+    - table_reference:
+        identifier: my_table
+    - alter_table_table_column_action:
+      - keyword: ADD
+      - keyword: COLUMN
+      - column_reference:
+          identifier: my_column
+      - data_type:
+          data_type_identifier: VARCHAR
+      - alter_table_table_column_action_add_column_inline_constraint:
+        - keyword: NOT
+        - keyword: 'NULL'
+    unparsable:
+      raw: ENFORCED
+- statement_terminator: ;
+- statement:
+    alter_table_statement:
+    - keyword: ALTER
+    - keyword: TABLE
+    - table_reference:
+        identifier: my_table
+    - alter_table_table_column_action:
+      - keyword: ADD
+      - keyword: COLUMN
+      - column_reference:
+          identifier: my_column
+      - data_type:
+          data_type_identifier: VARCHAR
+      - alter_table_table_column_action_add_column_inline_constraint:
+        - keyword: NOT
+        - keyword: 'NULL'
+    unparsable:
+    - raw: NOT
+    - raw: DEFERRABLE
+- statement_terminator: ;
+- statement:
+    alter_table_statement:
+    - keyword: ALTER
+    - keyword: TABLE
+    - table_reference:
+        identifier: my_table
+    - alter_table_table_column_action:
+      - keyword: ADD
+      - keyword: COLUMN
+      - column_reference:
+          identifier: my_column
+      - data_type:
+          data_type_identifier: VARCHAR
+      - alter_table_table_column_action_add_column_inline_constraint:
+        - keyword: NOT
+        - keyword: 'NULL'
+    unparsable:
+    - raw: INITIALLY
+    - raw: DEFERRED
 - statement_terminator: ;
 - statement:
     alter_table_statement:

@@ -993,7 +993,7 @@ class AlterTableTableColumnActionSegment(BaseSegment):
                     ),
                     optional=True,
                 ),
-                # @TODO: Add support for `inlineConstraint`
+                Ref("AlterTableTableColumnActionAddColumnInlineConstraintSegment", optional=True),
                 Sequence(
                     Ref.keyword("WITH", optional=True),
                     "MASKING",
@@ -1081,6 +1081,25 @@ class AlterTableTableColumnActionSegment(BaseSegment):
             ),
             # ^^^^^ COPIED FROM ANSI ^^^^^
         ),
+    )
+
+
+@snowflake_dialect.segment()
+class AlterTableTableColumnActionAddColumnInlineConstraintSegment(BaseSegment):
+    """ALTER TABLE `tableColumnAction` ADD COLUMN `inlineConstraint` grammar.
+
+    https://docs.snowflake.com/en/sql-reference/sql/alter-table.html#table-column-actions-tablecolumnaction
+    """
+
+    type = "alter_table_table_column_action_add_column_inline_constraint"
+
+    match_grammar = Sequence(
+        Sequence("NOT", "NULL", optional=True),
+        # @NOTE: Even though the grammar includes additional segments like
+        # `CONSTRAINT <name>`, `UNIQUE`, etc., they appear to just be part of what
+        # `<constraint_properties>` allows. Hence those segments are not repeated
+        # here.
+        Ref("ConstraintPropertiesSegment", optional=True),
     )
 
 
